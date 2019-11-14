@@ -1,0 +1,48 @@
+{% load thumbnail %}
+<div class="row text-center masonary">
+    <div id="portfolio-grid" class="menu-lists text-center col-3">
+        {% for food in objects %}
+            <div class="item-single pf-item pancakes meat">
+                <div class="item">
+                    <div class="thumb">
+                        {% thumbnail food.mealsimages_set.last.image "360x270" crop="center" as img %}
+                            <a href="{% url 'detail-food' food.id %}"><img
+                                    src={{ img.url }}></a>
+                        {% endthumbnail %}
+
+                        <div class="price">
+                            <h5>{{ food.price }}</h5>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h4><a href="#">{{ food.name }}</a></h4>
+                        <span>{{ food.category }}</span>
+                        <p>
+                            {{ food.ingredients }}
+                        </p>
+                        <div class="button">
+                            <a href="{% url 'order' food.id %}">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="pagination">
+    <span class="step-links">
+        {% if objects.has_previous %}
+            {#            <a class ='page_number' data-url="{% url 'close_foods_helper' %}?page=1">&laquo; first</a>#}
+            <button class ='page_number' data-url="{% url 'close_foods_helper' %}?page={{ objects.previous_page_number }}"><i class="ti-angle-left"></i></button>
+        {% endif %}
+
+{#        <span class="current">#}
+{#            Page {{ objects.number }} of {{ objects.paginator.num_pages }}.#}
+{#        </span>#}
+
+        {% if objects.has_next %}
+            <button class ='page_number' data-url="{% url 'close_foods_helper' %}?page={{ objects.next_page_number }}"><i class="ti-angle-right"></i></button>
+            {#             <button class ='page_number' data-url="{% url 'close_foods_helper' %}?page={{ objects.paginator.num_pages }}">last &raquo</button>#}
+        {% endif %}
+    </span>
+        </div>
+    </div>
+</div>

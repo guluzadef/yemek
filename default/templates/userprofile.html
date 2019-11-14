@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block body %}
+    <div class="test" style="margin: 40px">
+
+    </div>
+
+
+    <!-- Profile head -->
+    <div class="profile-head">
+        <div class="container">
+            <img src="{{ request.user.profile_photo.url }}" alt="avatar">
+            <h5><a href="#">{{ request.user.get_full_name }}</a></h5>
+            <p class="lead">{{ request.user.user_type }}</p>
+            <p>{{ request.user.about }}</p>
+
+            <ul class="social-icons">
+                {% if request.user.instagram %}
+                    <li><a class="{{request.user.instagram}}" href="#"><i class="fab fa-instagram"></i></a></li>
+                {% endif %}
+                {% if request.user.facebook %}
+                    <li><a class="" href="{{ request.user.facebook }}"><i class="fab fa-facebook"></i></a></li>
+                {% endif %}
+                {% if request.user.twitter %}
+                    <li><a class="{{ request.user.twitter }}" href="#"><i class="fab fa-twitter"></i></a></li>
+                {% endif %}
+
+            </ul>
+
+            <div class="row bottom-bar">
+
+                <ul class="col-sm-12 col-md-6 tab-list">
+                    <li class="active"><i>Shots</i><span>{{ count }}</span></li>
+                    <li class="hidden-xs"><a href="user-profile.html"><i>Likes</i><span>1.6K</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- END Profile head -->
+
+    <!-- User shots -->
+    <div class="gallery-area default-padding">
+        <div class="container">
+            <div class="food-menu-area">
+                <div class="row">
+                    <div class="col-md-12 text-center food-menu-content">
+
+                        <div class="gallery-items col-4">
+                            <div class="row">
+                                <div class="col-md-12 text-center food-menu-content">
+                                    <div class="row magnific-mix-gallery text-center masonary">
+                                        <div id="portfolio-grid">
+                                            {% for i in meals %}
+                                                <div class="pf-item pancakes meat">
+                                                    <div class="item-effect">
+                                                        <img src="
+
+
+
+
+                                                                {% thumbnail i.mealsimages_set.last.image "400x300" crop="center" as thumb %}{{ thumb.url }}{% endthumbnail %}"
+                                                             alt="">
+                                                        <a href="{% url 'detail-food' i.id %}"><i
+                                                                class="fa fa-plus"></i></a>
+
+
+                                                        {#                                                        <img width="200px" height="200px"#}
+                                                        {#                                                             src="{{ i.mealsimages_set.last.image.url }}" alt="Thumb">#}
+                                                        {#                                                        <a href="{% url 'detail-food' i.id %}"><i#}
+                                                        {#                                                                class="fa fa-plus"></i></a>#}
+                                                    </div>
+                                                </div>
+
+                                                <!-- End Single Item -->
+                                            {% endfor %}
+
+                                        </div>
+                                        <ul class="pager">
+                                            {% if meals.has_previous %}
+                                                <li class="page-item disabled"><a class="page-link"
+                                                                                  href="?page={{ meals.previous_page_number }}"><i
+                                                        class="fa fa-angle-left"></i></a>
+                                                </li>
+                                            {% endif %}
+
+
+                                            {% if meals.has_next %}
+                                                <li class="page-item"><a class="page-link"
+                                                                         href="?page={{ meals.next_page_number }}"><i
+                                                        class="fa fa-angle-right"></i></a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END User shots -->
+
+    <!-- END Main container -->
+{% endblock %}
+
+<!-- Site footer -->

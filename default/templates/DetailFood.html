@@ -1,0 +1,322 @@
+{% extends 'index.html' %}
+{% load thumbnail %}
+{% load widget_tweaks %}
+{% block body %}
+    <!-- End Header Top -->
+
+    <!-- Header
+    ============================================= -->
+
+    <!-- End Header -->
+
+    <!-- Start Breadcrumb
+    ============================================= -->
+    <div class="breadcrumb-area shadow text-center dark bg-fixed text-light"
+         style="background-image: url({{ photos.detail_page.url }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Blog Left Sidebar</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+    <!-- Start Blog
+    ============================================= -->
+    <div class="test" style="margin:40px">
+
+    </div>
+    <div class="blog-area full-blog right-sidebar default-padding">
+        <div class="container">
+            <div class="row">
+                <div class="blog-items">
+                    <div class="blog-content col-md-8">
+                        <!-- Single Item -->
+                        {#                        <div class="single-item">#}
+                        {#                            <div class="thumb" style="width: 616px;height: 452px;" height="450px">#}
+                        <ul class="image-gallery">
+
+                            {% for i in object.mealsimages_set.all %}
+                                <li id="fixed-size" data-thumb="
+                                        {% thumbnail i.image "146x82" crop="center" as thumb %}{{ thumb.url }}{% endthumbnail %}"
+                                    data-src="{{ i.image.url }}">
+                                    <img src="
+                                            {% thumbnail i.image "750x420" crop="center" as base %}{{ base.url }}{% endthumbnail %}">
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div id="comments" class="card" style="margin: 0px;">
+                            <div class="card-header">
+                                <h6>Comments (<span class="cm_count">{{ object.commentpost_set.all.count }}</span>)</h6>
+                                <div class="beyen">
+                                    <h3 class="post_like_count">{{ object.like_set.all.count }}</h3>
+                                    {% if check_like %}
+                                        <i class="fa fa-heart like likebutton-{{ object.id }}"
+                                           data-id="{{ object.id }}"></i>
+                                    {% else %}
+                                        <i class="fa fa-heart-o fa-heart like likebutton-{{ object.id }}"
+                                           data-id="{{ object.id }}"></i>
+
+                                    {% endif %}
+                                </div>
+
+                                <div class="comment-pagination">
+                                    <ul class="pagination">
+                                        {% if current_post_comment.has_previous %}
+                                            <li class="page-item disabled"><a class="page-link"
+                                                                              data-url="{{ request.path }}?page={{ current_post_comment.previous_page_number }}"><i
+                                                    class="ti-angle-left"></i></a>
+                                            </li>
+                                        {% endif %}
+                                        {% if current_post_comment.has_next %}
+                                            <li class="page-item"><a class="page-link"
+                                                                     data-url="{{ request.path }}?page={{ current_post_comment.next_page_number }}"><i
+                                                    class="ti-angle-right"></i></a>
+                                            </li>
+                                            {#                                               <a class ='page_number' data-url="{% url 'close_foods_helper' %}?page={{ objects.previous_page_number }}">next</a>#}
+                                        {% endif %}
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <br>
+
+                            <ul class="comments">
+                                {% for i in current_post_comment %}
+                                    <li>
+                                        <a href=" {% url 'profile' i.id %} "><img
+                                                src="{{ i.user.profile_photo.url }}" alt=""></a>
+                                        <h6><a href="{% url 'profile' i.id %}">{{ i.user }}</a>
+                                            <time datetime="{{ i.date }}">{{ i.date|timesince }}</time>
+                                        </h6>
+                                        <p>{{ i.comment }}</p>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+
+                            <form class="comment-form">
+                                <img src="{{ request.user.profilephoto.url }}" alt="">
+                                <p>
+                                    {% for i in form %}
+                                        {% render_field i class="form-control" placeholder='Your comment' id='comment' %}
+                                    {% endfor %}
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Start Sidebar -->
+                    <div class="sidebar col-md-4">
+
+                        <aside>
+                            <div class="info">
+                                <div class="testimonial-items">
+                                    <div class="item">
+
+                                        <div class="thumb-2">
+                                            <div class="clients-info">
+                                                <h5>{{ object.author }}</h5>
+                                                <div class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                            </div>
+
+                                            <img src="{{ object.author.profile_photo.url }}" alt="Thumb">
+
+                                        </div>
+
+                                        {% if object.author == request.user %}
+                                            <button style="float: right;" class="btn btn-danger" onclick="$('#deleteModal').modal();">Yeməyi sil</button>
+                                        {% endif %}
+                                        {% if object.author == request.user %}
+                                            <br>
+                                            <br>
+                                            <hr class="detail_food_ifuser">
+                                        {% endif %}
+                                        <h4>
+                                            <a href="">{{ object.name }} </a>
+                                        </h4>
+                                        <p>
+                                            {{ object.aditional_info }}
+                                        </p>
+                                        <p>
+                                            {{ object.location }}
+                                        </p>
+                                        <div class="delivery">
+                                            {% if object.delivery_type != 'User' %}
+                                                <h4><a href="">
+                                                    Çatdırılma-movcuddur <i class="far fa-check-square"></i>
+                                                </a></h4>
+                                            {% else %}
+                                                <h4><a href="">
+                                                    Çatdırılma-yoxdur <i class="far fa-check-square"></i>
+                                                </a></h4>rm
+                                            {% endif %}
+                                        </div>
+                                        {% if object.author != request.user %}
+                                            <a class="btn circle btn-theme border btn-md"
+                                               href="{% url 'order' object.id %}">Order
+                                                Now</a>
+                                        {% endif %}
+
+                                    </div>
+                                    <br>
+                                    <br>
+
+                                    {#                            <div class="sidebar-item social-sidebar">#}
+                                    {#                                <div class="title">#}
+                                    {#                                    <h4>follow us</h4>#}
+                                    {#                                </div>#}
+                                    {#                                <div class="sidebar-info">#}
+                                    {#                                    <ul>#}
+                                    {#                                        <li class="facebook">#}
+                                    {#                                            <a href="#">#}
+                                    {#                                                <i class="fab fa-facebook-f"></i>#}
+                                    {#                                            </a>#}
+                                    {#                                        </li>#}
+                                    {#                                        <li class="twitter">#}
+                                    {#                                            <a href="#">#}
+                                    {#                                                <i class="fab fa-twitter"></i>#}
+                                    {#                                            </a>#}
+                                    {#                                        </li>#}
+                                    {#                                        <li class="pinterest">#}
+                                    {#                                            <a href="#">#}
+                                    {#                                                <i class="fab fa-pinterest"></i>#}
+                                    {#                                            </a>#}
+                                    {#                                        </li>#}
+                                    {#                                        <li class="g-plus">#}
+                                    {#                                            <a href="#">#}
+                                    {#                                                <i class="fab fa-google-plus-g"></i>#}
+                                    {#                                            </a>#}
+                                    {#                                        </li>#}
+                                    {#                                    </ul>#}
+                                    {#                                </div>#}
+                                    {#                            </div>#}
+                        </aside>
+                    </div>
+                    <!-- End Start Sidebar -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'delete' object.pk %}">
+                        {% csrf_token %}
+                        <button type="submit">Sil</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    comment#}
+    <script>
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                }
+            }
+        });
+        $(document).ready(function (e) {
+            $(document).on('click','.page-link',function (e) {
+                e.preventDefault();
+                console.log('clc');
+                var data_url = $(this).attr('data-url')
+                $.ajax({
+                    method:"GET",
+                    url:data_url,
+                    success:function (data) {
+                        var current_comments = $(data).find('.comments').html()
+                        var pagination_link = $(data).find('.comment-pagination').html()
+                        $('.comments').html(current_comments)
+                        $('.comment-pagination').html(pagination_link)
+                    }
+                })
+            })
+            $('#comment').focus(function () {
+                var post_id_cm = {{ object.id }}
+                    $('.comment-form').submit(function (e) {
+                        e.preventDefault()
+                        var text_comment = $('#comment').val();
+                        $.ajax({
+                            url: '{{ request.path }}',
+                            method: 'POST',
+                            data: {
+                                post_id_cm: post_id_cm,
+                                text_comment: text_comment,
+                            },
+                            success: function (data) {
+                                console.log(data)
+                                $('.comments').append(
+                                    "<li>" +
+                                    `<a href='user-profile.html'><img src='${data.image}' alt=''></a>` +
+                                    `<h6><a href='user-profile.html'>${data.user}</a>` +
+                                    `<time datetime=${data.create_date}>now</time>` +
+                                    "</h6>" +
+                                    `<p>${data.text_comment}</p>` +
+                                    "</li>"
+                                )
+                                $('.cm_count').text(data.comment_count)
+                                $("#comment").val('')
+                            }
+                        })
+                    })
+            })
+            $(".like").click(function (e) {
+                var currentpost_id = $(this).attr("data-id");
+                var likebutton = $(".likebutton-" + currentpost_id);
+                var like_count = $(".like-" + currentpost_id);
+                var form = new FormData();
+                form.append("post_id", currentpost_id);
+                $.ajax({
+                    url: "{% url 'like-view' %}",
+                    method: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: form,
+                    success: function (data) {
+                        console.log(data.like_count);
+                        $(".post_like_count").text(data.like_count);
+                        $(".like-" + currentpost_id).text(data.like_count);
+                        if (data.status) {
+                            likebutton.addClass("fa-heart");
+                            likebutton.removeClass("fa-heart-o");
+                        } else {
+                            {#likebutton.removeClass("fa-heart");#}
+                            likebutton.addClass("fa-heart-o");
+                        }
+                    },
+                    error: function (xhr, msg, text) {
+                        console.log(xhr, msg, text);
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}

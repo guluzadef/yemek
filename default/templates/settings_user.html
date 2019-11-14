@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+<link href="{% static 'css/profil.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/profil_custom.css' %}" rel="stylesheet"/>
+{% load widget_tweaks %}
+{% block body %}
+
+    <div class="test" style="margin: 100px"></div>
+
+
+    <main>
+
+        <!-- Page links -->
+         <div class="page-links">
+        <div class="container">
+            <div class="pull-left">
+                <ul class="link-list">
+                    <li><a class="active" href="{% url 'settings' %}">Profile</a></li>
+                    <li><a  href="{% url 'social' %}">Social medias</a></li>
+                    <li><a href="{% url 'password' %}">Security</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        <!-- END Page links -->
+
+        <section class="no-border-bottom section-sm">
+            <div class="container">
+                <header class="section-header">
+                    <span>Settings</span>
+                    <h3>Profile settings</h3>
+                    <p>Change your name, avatar, location, description, etc.</p>
+                </header>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Profile</h6>
+                            </div>
+
+                            <div class="card-block">
+                                <div class="form-content">
+                                    <form method="post" enctype="multipart/form-data">
+
+                                        {% csrf_token %}
+
+                                        <input type="hidden" name="settings" value="1">
+                                        {% for field in form %}
+                                            <div class="form-group">
+                                                <label for=" {{ field.id_for_label }}">{{ field.label }}:</label>
+                                                {{ field|add_class:"form-control" }}
+
+
+                                            </div>
+
+                                        {% endfor %}
+                                        <button type="submit" class="btn btn-success">Yadda saxla</button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Avatar</h6>
+                            </div>
+
+                            <div class="card-block">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="profile_settings" value="sdsadasd">
+                                    {% for field in profilephoto %}
+                                        <div class="form-group">
+                                            <label for=" {{ field.id_for_label }}"
+                                                   style="display: none"></label>
+                                            {{ field|add_class:"form-control dropify" }}
+
+
+                                        </div>
+
+                                    {% endfor %}
+                                    {#                                    <input type="file" class="dropify" data-default-file="assets/img/avatar-2.jpg"#}
+                                    {#                                           data-max-height="150" data-max-width="150">#}
+                                    <br>
+                                    <button class="btn btn-primary btn-sm" type="submit">Yenilə</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+    <!-- END Main container -->
+
+
+    <!-- Site footer -->
+{% endblock %}

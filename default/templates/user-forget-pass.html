@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+<link href="{% static 'css/profil.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/profil_custom.css' %}" rel="stylesheet"/>
+{% block body %}
+    <div class="test" style="margin: 100px"></div>
+    <main>
+        <div class="page-links">
+            <div class="container">
+                <div class="pull-left">
+                    <ul class="link-list">
+                        <li><a href="{% url 'settings' %}">Profile</a></li>
+                        <li><a  href="{% url 'social' %}">Social medias</a></li>
+                        <li><a class="active" href="{% url 'password' %}">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <section class="no-border-bottom section-sm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Password recovery</h6>
+                            </div>
+
+                            <div class="form-content">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+
+
+                                    {% for field in form %}
+                                        <div class="form-group">
+                                            <label for=" {{ field.id_for_label }}">{{ field.label }}:</label>
+                                            {{ field|add_class:"form-control"|default_if_none:'/' }}
+
+
+                                        </div>
+
+                                    {% endfor %}
+                                    <button type="submit" class="btn btn-success">Yenilə</button>
+
+                                </form>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!-- END Main container -->
+
+
+    <!-- Site footer -->
+{% endblock %}

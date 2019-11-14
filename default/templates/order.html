@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block body %}
+    <div class="breadcrumb-area shadow text-center dark bg-fixed text-light" style="background-image: url(assets/img/banner/20.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Contact Us</h1>
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#">Pages</a></li>
+                        <li class="active">Contact</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contact-us-area default-padding">
+        <div class="container">
+            <div class="row">
+                <div class="contact-box">
+
+                    <!-- Start Form -->
+                    <div class="col-md-5">
+                        <form id="msform" method="POST">
+                            {% csrf_token %}
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active">Personal Details</li>
+                                <li>Social Profiles</li>
+                                <li>Account Setup</li>
+                                <li>Submit</li>
+                            </ul>
+                            <!-- fieldsets -->
+                            <fieldset>
+                                <h2 class="fs-title">Elaqe nomresi</h2>
+                                {#                                <h3 class="fs-subtitle">Tell us something more about you</h3>#}
+                                <div class="number-field">
+                                    <input class="format-n" value="+994" readonly>
+                                    {% render_field order_form.phone_number placeholder=order_form.phone_number.label  %}
+                                </div>
+
+
+                                <input type="button" name="next" class="next action-button" value="Next"/>
+                            </fieldset>
+                            <fieldset>
+                                <h2 class="fs-title">Unvan</h2>
+                                {#                                <h3 class="fs-subtitle">Zehmet olmasa unvaninizi daxil edin</h3>#}
+                                {{ order_form.location }}
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                                <input type="button" name="next" class="next action-button" value="Next"/>
+                            </fieldset>
+                            <fieldset>
+                                <h2 class="fs-title">Catdirilma</h2>
+                                {#                                <h3 class="fs-subtitle">Fill in your credentials</h3>#}
+                                {% if object.delivery_price %}
+                                    {{ order_form.delivery_type }}
+                                    <div class="del_price"></div>
+                                {% else %}
+                                    <p>Catdirilma yoxdur</p>
+                                {% endif %}
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                                <input type="button" name="next" class="next action-button" value="Next"/>
+                            </fieldset>
+                            <fieldset>
+                                <h2 class="fs-title">Say ve qiymet</h2>
+                                <p>1 porsun qiymeti: <br> {{ object.price }} azn </p>
+                                {#                                <h3 class="fs-subtitle">Zehmet olmasa unvaninizi daxil edin</h3>#}
+                                <div class="input-group input-number-group">
+                                    <div class="input-group-button">
+                                        <span class="input-number-decrement">-</span>
+                                    </div>
+                                    {% render_field order_form.quantity readonly='' class="input-number" type="number" value="1" min="1" max=object.quantity %}
+                                    {#                                    <input class="input-number" type="number" value="1" min="0" max="1000">#}
+                                    <div class="input-group-button">
+                                        <span class="input-number-increment">+</span>
+                                    </div>
+                                </div>
+                                <div class="total-container mt-2">
+
+                                    <p class="total-price">{{ object.price }} * <span class="count">1</span> = <span id="equal" class="equal">{{ object.price }}</span></p>
+
+                                    <h4>Total price: <span class="total_price_all">{{ object.price }} azn</span></h4>
+
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                                <input type="submit" name="submit" id=0 data-id="{{ object.author.id }}" class="to_cooker submit action-button" value="Submit"/>
+                            </fieldset>
+
+                        </form>
+                    </div>
+                    <!-- End Form -->
+
+                    <div class="col-md-6 col-md-offset-1 info">
+                        <img src="{{ object.mealsimages_set.last.image.url }}" alt="">
+                        <h2>{{ object.author.get_full_name }}</h2>
+                        <p>
+                            Often merit stuff first oh up hills as he. Servants contempt as although addition dashwood is procured. Interest in yourself an do of numerous feelings cheerful confined.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.input-number-increment').click(function() {
+            var $input = $(this).parents('.input-number-group').find('.input-number');
+            var val = parseInt($input.val(), 10);
+            var delivery_price = $('.delivery_price').text()
+            var price = {{ object.price }}
+            if(val<$input .attr('max')){
+                $input.val(val + 1);
+                count = val+1
+                $('.count').text(count)
+                var total_price = {{ object.price }} * count
+                if(delivery_price){
+                    $('.equal').text(`${total_price} azn + Catdirilma ${delivery_price} azn`)
+                    $('.total_price_all').text(parseInt(total_price) + parseInt(delivery_price)+ ' azn')
+                }
+                else{
+                    $('.equal').text(`${total_price} azn`)
+                    $('.total_price_all').text(`${total_price} azn`)
+                }
+
+            }
+        });
+
+        $('.input-number-decrement').click(function() {
+
+            var $input = $(this).parents('.input-number-group').find('.input-number');
+            var val = parseInt($input.val(), 10);
+            var delivery_price = $('.delivery_price').text()
+            var price = {{ object.price }}
+            if(val>1){
+                $input.val(val - 1);
+                count = val-1
+                $('.count').text(count)
+                var total_price = {{ object.price }} * count
+                if(delivery_price ){
+                    $('.equal').text(`${total_price} azn + Catdirilma ${delivery_price} azn`)
+                    $('.total_price_all').text(parseInt(total_price) + parseInt(delivery_price)+ ' azn')
+                }
+                else{
+                    $('.equal').text(`${total_price} azn`)
+                    $('.total_price_all').text(`${total_price} azn`)
+                }
+            }
+        })
+    </script>
+    <script>
+        var needsUpdate = true;
+        $(document).on('click','li',function () {
+            var checker = $(this).text()
+            var after =$('.del_price')
+            var delivery_price = '{{ object.delivery_price }}'
+            var price = {{ object.price }}
+            if (checker ==='Shef' && needsUpdate){
+                after.append(`<p class="del_price_field">Emek haqqi : <span class="delivery_price">${delivery_price}</span> azn </p>`)
+                count = $('.input-number').val()
+                var total_price = {{ object.price }} * parseInt(count)
+                $('.equal').text(`${total_price} azn + Catdirilma ${delivery_price} azn`)
+                $('.total_price_all').text(parseInt(total_price) + parseInt(delivery_price)+ ' azn')
+                needsUpdate = false;
+            }
+            else if(checker ==='User'){
+                $('.del_price_field').remove()
+                count = $('.input-number').val()
+                var total_price = {{ object.price }} * parseInt(count)
+                $('.equal').text(`${total_price} azn`)
+                $('.total_price_all').text(`${total_price} azn`)
+                needsUpdate = true;
+            }
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,588 @@
+.btn-cooker {
+    display: block !important;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+.side{
+    z-index: 1000 !important;
+}
+.info_meals{
+    text-align: center;
+    padding:13px 0px 5px 0px;
+}
+a.addpost {
+    float: left;
+    background: none;
+    border-color: #e9422a78;
+    padding: 11px;
+    margin: 22px;
+    font-style: italic;
+    font-family: inherit;
+}
+.beyen{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -43px;
+}
+
+a.addpost {
+    float: left;
+    background: none;
+    border-color: #e9422a78;
+    padding: 11px;
+    margin: 22px;
+    font-style: italic;
+    font-family: inherit;
+}
+
+.btn-user {
+    display: block !important;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+.input-margin {
+    margin-bottom: 10px;
+}
+
+.format-n {
+    width: 60px !important;
+}
+
+.number-field {
+    display: flex;
+}
+
+.changes {
+    display: flex;
+    justify-content: space-between;
+}
+
+.choice {
+    display: flex;
+}
+
+.page_profile {
+    display: flex;
+    height: 342.234px;
+    justify-content: flex-end;
+    position: inherit; !important;
+}
+
+.active-button {
+    border: 1px solid grey !important;
+}
+
+.input-icons i {
+    position: absolute;
+
+}
+
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/*.foter{*/
+/*    background: #000000bd;*/
+/*}*/
+.profile_image {
+    border-radius: 100%;
+    height: 40px;
+!important;
+    margin-top: 22px;
+}
+
+.icon {
+    padding: 10px;
+    min-width: 40px;
+}
+
+.settings-photo {
+    border-radius: 80%;
+    width: 400px;
+}
+
+/*basic reset*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/*form styles*/
+#msform {
+    text-align: center;
+    position: relative;
+    margin-top: 30px;
+}
+
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0px;
+    /*box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);*/
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 10%;
+
+    /*stacking fieldsets above each other*/
+    position: relative;
+}
+
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+    display: none;
+}
+
+/*inputs*/
+#msform input, #msform textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 13px;
+}
+
+#msform input:focus, #msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ee0979;
+    outline-width: 0;
+    transition: All 0.5s ease-in;
+    -webkit-transition: All 0.5s ease-in;
+    -moz-transition: All 0.5s ease-in;
+    -o-transition: All 0.5s ease-in;
+}
+
+/*buttons*/
+#msform .action-button {
+    width: 100px;
+    /*background: #ee0979;*/
+    background: #e7272d;
+
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    /*border-radius: 25px;*/
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
+#msform .action-button:hover, #msform .action-button:focus {
+    border: 2px solid #e7272d;
+    background: transparent;
+    color: #e7272d
+}
+
+#msform .action-button-previous {
+    width: 100px;
+    background: #C5C5F1;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    /*border-radius: 25px;*/
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
+#msform .action-button-previous:hover, #msform .action-button-previous:focus {
+    /*box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;*/
+    border: 2px solid #C5C5F1;
+    background: transparent;
+    color: #C5C5F1
+}
+
+/*headings*/
+.fs-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.fs-subtitle {
+    font-weight: normal;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/*progressbar*/
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+
+#progressbar li {
+    list-style-type: none;
+    color: #e7272d;
+    text-transform: uppercase;
+    font-size: 9px;
+    width: 25%;
+    float: left;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 24px;
+    height: 24px;
+    line-height: 26px;
+    display: block;
+    font-size: 12px;
+    color: #333;
+    background: white;
+    border-radius: 25px;
+    margin: 0 auto 10px auto;
+}
+
+/*progressbar connectors*/
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: white;
+    position: absolute;
+    left: -50%;
+    top: 9px;
+    z-index: -1; /*put it behind the numbers*/
+}
+
+#progressbar li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none;
+}
+
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar li.active:after {
+    background: #e7272d;
+    color: white;
+}
+
+
+/* Not relevant to this form */
+.dme_link {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.dme_link a {
+    background: #FFF;
+    font-weight: bold;
+    color: #ee0979;
+    border: 0 none;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 5px 25px;
+    font-size: 12px;
+}
+
+.dme_link a:hover, .dme_link a:focus {
+    background: #C5C5F1;
+    text-decoration: none;
+}
+
+/*number*/
+.input-number-group {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-justify-content: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+}
+
+.input-number-group input[type=number]::-webkit-inner-spin-button,
+.input-number-group input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.input-number-group .input-group-button {
+    line-height: calc(80px / 2 - 5px);
+}
+
+.input-number-group .input-number {
+    width: 60px;
+    padding: 0 12px;
+    vertical-align: top;
+    text-align: center;
+    outline: none;
+    display: block;
+    margin: 0;
+}
+
+.input-number-group .input-number,
+.input-number-group .input-number-decrement,
+.input-number-group .input-number-increment {
+    border: 1px solid #cacaca;
+    height: 40px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 0;
+}
+
+.input-number-group .input-number-decrement,
+.input-number-group .input-number-increment {
+    display: inline-block;
+    width: 40px;
+    background: #e6e6e6;
+    color: #0a0a0a;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.input-number-group .input-number-decrement {
+    margin-right: 0.3rem;
+}
+
+.input-number-group .input-number-increment {
+    margin-left: 0.3rem;
+}
+
+
+.icon_side {
+    margin-right: 18px !important;
+}
+
+/*circle*/
+.circle_notify{
+    color: red;
+}
+.thumb-2{
+    display: flex;
+}
+.clients-info{
+    margin:auto;
+}
+/*asdsadadasdad*/
+
+.hovereffect {
+    width:100%;
+    height:100%;
+    float:left;
+    overflow:hidden;
+    position:relative;
+    text-align:center;
+    cursor:default;
+}
+.fa-heart{
+    color: red;
+    font-size: 34px;
+}
+.fa-heart-o{
+    content: "\f004";
+    color: #c1c1c1;
+    font-size: 34px;
+}
+
+.hovereffect .overlay {
+    width:100%;
+    height:100%;
+    position:absolute;
+    overflow:hidden;
+    top:0;
+    left:0;
+    opacity:0;
+    background-color:rgba(0,0,0,0.5);
+    -webkit-transition:all .4s ease-in-out;
+    transition:all .4s ease-in-out
+}
+
+.hovereffect img {
+    display:block;
+    position:relative;
+    -webkit-transition:all .4s linear;
+    transition:all .4s linear;
+}
+
+.hovereffect h2 {
+    text-transform:uppercase;
+    color:#fff;
+    text-align:center;
+    position:relative;
+    font-size:17px;
+    background:rgba(0,0,0,0.6);
+    -webkit-transform:translatey(-100px);
+    -ms-transform:translatey(-100px);
+    transform:translatey(-100px);
+    -webkit-transition:all .2s ease-in-out;
+    transition:all .2s ease-in-out;
+    padding:10px;
+}
+
+.hovereffect a.info {
+    text-decoration:none;
+    display:inline-block;
+    text-transform:uppercase;
+    color:#fff;
+    border:1px solid #fff;
+    background-color:transparent;
+    opacity:0;
+    filter:alpha(opacity=0);
+    -webkit-transition:all .2s ease-in-out;
+    transition:all .2s ease-in-out;
+    margin:50px 0 0;
+    padding:7px 14px;
+}
+
+.hovereffect a.info:hover {
+    box-shadow:0 0 5px #fff;
+}
+
+.hovereffect:hover img {
+    -ms-transform:scale(1.2);
+    -webkit-transform:scale(1.2);
+    transform:scale(1.2);
+}
+
+.hovereffect:hover .overlay {
+    opacity:1;
+    filter:alpha(opacity=100);
+}
+
+.hovereffect:hover h2,.hovereffect:hover a.info {
+    opacity:1;
+    filter:alpha(opacity=100);
+    -ms-transform:translatey(0);
+    -webkit-transform:translatey(0);
+    transform:translatey(0);
+}
+
+.hovereffect:hover a.info {
+    -webkit-transition-delay:.2s;
+    transition-delay:.2s;
+}
+.logo_yemake{
+    font-family: 'Lora', serif;
+    font-weight: 800;
+    font-size: 20px;
+    color:#fff;
+    margin-top: 3px;
+    margin-left: 6px;
+}
+.navbar-brand{
+    display: flex;
+    margin-top: 8px !important;
+}
+.navbar-brand img{
+    width: 30px !important;
+    height: 30px !important;
+}
+
+/*Search*/
+.form-group-1 .form-group input.form-control::-webkit-input-placeholder{
+    display:none;
+}
+.form-group-1 .form-group input.form-control::-moz-placeholder{
+    display:none;
+}
+.navbar-right{
+    min-width:450px; /*or I can probably just use columns*/
+}
+.navbar-right form{
+    width:100%;
+}
+.form-group{
+    position:relative;
+    width:100%;
+    min-width:60px;
+    height:60px;
+    overflow:hidden;
+    transition: width 1s;
+    backface-visibility:hidden;
+}
+.form-group-search{
+    width: 0% !important;
+}
+.form-group input.form-control{
+    position:absolute;
+    top:0;
+    right:0;
+    outline:none;
+    width:100%;
+    height:60px;
+    margin:0;
+    z-index:10;
+}
+input[type="text"].form-control{
+    -webkit-appearence:none;
+    -webkit-border-radius:0;
+}
+.form-control-submit,
+.search-label{
+    width:60px;
+    height:60px;
+    position:absolute;
+    right:0;
+    top:0;
+    padding:0;
+    margin:0;
+    text-align:center;
+    cursor:pointer;
+    line-height:60px;
+    color:white;
+    /*background:white;*/
+}
+.form-control-submit{
+    background:#fff; /*stupid IE*/
+    opacity: 0;
+    color:transparent;
+    border:1px solid black;
+    outline:none;
+    z-index:-1;
+}
+.search-label{
+    z-index:90;
+    /*border:0.5px solid grey;*/
+
+}
+.form-group.sb-search-open,
+.no-js .sb-search-open{
+    width:30% !important;
+}
+.form-group.sb-search-open .search-label,
+.no-js .sb-search .search-label {
+    background: #da6d0d;
+    color: #fff;
+    z-index: 11;
+}
+.form-group.sb-search-open .form-control-submit,
+.no-js .form-control .form-control-submit {
+    z-index: 90;
+}
+
+.under_search_hidden{
+    display: none !important;
+}
+#search{
+    margin-top: 13px;
+}
+
+
+/*slick css*/
+.slick-arrow{
+    text-shadow: 1px 1px 1px #ccc;
+}

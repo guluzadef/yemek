@@ -1,0 +1,45 @@
+
+
+
+
+/*.home {*/
+/*    border-top-left-radius: 1px;*/
+/*    border-top-right-radius: 1px;*/
+/*    border-bottom: 1px #d7d9dd solid;*/
+/*    position: relative; }*/
+/*.settings {*/
+/*    border-bottom-left-radius: 1px;*/
+/*    border-bottom-right-radius: 1px;*/
+/*    border-top: 1px #d7d9dd solid; }*/
+
+/*.arrow {*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    margin-left: 275px;*/
+/*    border-right: 9px solid transparent;*/
+/*    border-left: 9px solid transparent;*/
+/*    border-bottom: 9px solid #FEFEFE;*/
+/*    position: absolute;*/
+/*    top: -9px; }*/
+
+/*.fa-chevron-up {*/
+/*    margin-left: 110px; }*/
+
+/*.marked {*/
+/*    background-color: #3FA6FD;*/
+/*    border-radius: 2px; }*/
+
+/*.marked1 {*/
+/*    color: #ffffff; }*/
+
+.rotate {
+    moz-transition: all 0.3s linear !important;
+    webkit-transition: all 0.3s linear !important;
+    transition: all 0.3s linear !important; }
+
+.rotate.down {
+    moz-transform: rotate(180deg) !important;
+    webkit-transform: rotate(180deg) !important;
+    transform: rotate(180deg) !important; }
+
+/*# sourceMappingURL=main.css.map */

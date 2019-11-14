@@ -1,0 +1,18 @@
+{% load widget_tweaks %}
+<form method="POST" id="cookerForm" action="{% url 'cooker_register' %}">
+    {% csrf_token %}
+    {% for i in form %}
+        {% if i.label == 'Phone' %}
+            <div class="number-field">
+                <input class="format-n form-control" value="+994" readonly>
+                {% render_field i class="format-c form-control input-margin" placeholder=i.label %}
+            </div>
+        {% else %}
+            {% render_field i class="form-control input-margin" placeholder=i.label%}
+        {% endif %}
+        {% for error in i.errors %}
+            <p class="help-block">{{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+    <button class="btn btn-cooker" name="cooker_register" type="submit">Sign in(cooker)</button>
+</form>

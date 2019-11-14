@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="breadcrumb-area shadow text-center dark bg-fixed text-light" style="background-image: url();">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Blog Left Sidebar</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total_price</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if orders_checker%}
+                        {% for order in orders_user %}
+                            <tr>
+                                <td>{{ order.customer }}</td>
+                                <td>{{ order.location }}</td>
+                                <td>{{ order.quantity }}</td>
+                                <td>{{ order.total_price }}</td>
+
+                                <td>
+                                    {% if not order.status and not order.expire %}
+                                        <a class="btn btn-theme border">Qebul olunmayib</a>
+                                    {% elif order.expire %}
+                                        <a class="btn btn-theme border">Qebul edilmedi</a>
+                                    {% else %}
+                                        <a class="btn btn-theme-2 border"><i class="far fa-check-square"></i>Qebul olunub</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <h4 class="info_meals">Hal haizrda sifarisiniz yoxdur</h4>
+                    {% endif %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

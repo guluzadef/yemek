@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+<link href="{% static 'css/profil.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/profil_custom.css' %}" rel="stylesheet"/>
+{% block body %}
+    <div class="test" style="margin: 100px"></div>
+    <!-- Page links -->
+    <div class="page-links">
+        <div class="container">
+            <div class="pull-left">
+                <ul class="link-list">
+                    <li><a href="{% url 'settings' %}">Profile</a></li>
+                    <li><a class="active" href="{% url 'social' %}">Social medias</a></li>
+                    <li><a href="{% url 'password' %}">Security</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- END Page links -->
+
+    <section class="no-border-bottom section-sm">
+        <div class="container">
+            <header class="section-header">
+                <span>Settings</span>
+                <h3>Social medias profiles</h3>
+                <p>Update your facebook, twitter, linkedin, etc. address</p>
+            </header>
+
+            <div class="row" >
+                <div class="col-xs-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6>Social pages</h6>
+                        </div>
+
+                        <div class="form-content">
+                            <form method="post" enctype="multipart/form-data"
+                                  action="{% url 'social' %}">
+                                {% csrf_token %}
+
+
+                                {% for field in form %}
+                                    <div class="form-group">
+                                        <label for=" {{ field.id_for_label }}">{{ field.label }}:</label>
+                                        {{ field|add_class:"form-control"|default_if_none:'/' }}
+
+
+                                    </div>
+
+                                {% endfor %}
+                                <button type="submit" class="btn btn-success">Yadda Saxla</button>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- END Main container -->
+
+
+{% endblock %}

@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block body %}
+
+    <div class="breadcrumb-area shadow text-center dark bg-fixed text-light"
+         style="background-image: url({{ photos.example_page.url }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{ text.addfood_page }}</h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="reservation about-area" style="margin-bottom: 100px">
+        <div class="container">
+            <div class="row">
+                <div class="reservation-items about-items">
+                    <div class="col-md-6 info">
+                        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                        <div id="map"></div>
+                        {#                        <h2>How do i make raservations</h2>#}
+                        {#                        <p>#}
+                        {#                            Pleased anxious or as in by viewing forbade minutes prevent. Too leave had those get being led weeks blind. Had men rose from down lady able. Its son him ferrars proceed six parlors.#}
+                        {#                        </p>#}
+                        {#                        <p>#}
+                        {#                            Advanced diverted domestic sex repeated bringing you old. Possible procured her trifling laughter thoughts property she met way. Companions shy had solicitude favourable own. Which could saw guest man now heard but. Lasted my coming uneasy marked so should. Gravity letters it amongst herself dearest an windows by. Wooded ladies she basket.#}
+                        {#                        </p>#}
+                        {#                        <div class="address">#}
+                        {#                            <ul>#}
+                        {#                                <li>#}
+                        {#                                    <span>Address</span>#}
+                        {#                                    <p>#}
+                        {#                                        22 Baker Street, London, United Kingdom, W1U 3BW#}
+                        {#                                    </p>#}
+                        {#                                </li>#}
+                        {#                                <li>#}
+                        {#                                    <span>Phone</span>#}
+                        {#                                    <p>#}
+                        {#                                        +123 456 7890#}
+                        {#                                    </p>#}
+                        {#                                </li>#}
+                        {#                                <li>#}
+                        {#                                    <span>Email</span>#}
+                        {#                                    <p>#}
+                        {#                                        support@restcafe.com#}
+                        {#                                    </p>#}
+                        {#                                </li>#}
+                        {#                            </ul>#}
+                        {#                        </div>#}
+                    </div>
+                    <!-- Start Form -->
+                    <div class="col-md-6">
+                        {#                            <div class="icon">#}
+                        {#                                <i class="fas fa-utensils"></i>#}
+                        {#                            </div>#}
+                        <form id="msform" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="lng-lat">
+
+                            </div>
+                            <div class="location_cooker">
+
+                            </div>
+                            <input type="hidden" name="image_data" value="{{ image_data }}">
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active">Kateqoriya</li>
+                                <li>Yemek Haqqinda</li>
+                                <li>Catdirilma</li>
+                                <li>Submit</li>
+
+                            </ul>
+                            <!-- fieldsets -->
+                            <fieldset>
+                                <h2 class="fs-title">Kateqoriya</h2>
+                                {#                                <h3 class="fs-subtitle">Tell us something more about you</h3>#}
+                                {% render_field form.category placeholder=form.category.label %}
+                                <input type="button" name="next" class="next action-button" value="Next"/>
+                            </fieldset>
+                            <fieldset>
+                                <h2 class="fs-title">Yemek haqqinda</h2>
+                                {#                                <h3 class="fs-subtitle">Zehmet olmasa unvaninizi daxil edin</h3>#}
+                                {% render_field form.name placeholder=form.name.label %}
+                                {% render_field form.aditional_info placeholder=form.aditional_info.label rows="2" cols="50" %}
+                                <div class="dropzone dropzone-previews dz-clickable my_dropzone">
+                                    <div class="dz-default dz-message">
+                                        <span><span class="dropzone-file-icon"></span>Drag and drop a file here or click</span></div>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                                <input type="button" name="next" class="next action-button" value="Next"/>
+                            </fieldset>
+                            <fieldset>
+                                <h2 class="fs-title">Catdirilma novu</h2>
+                                {% render_field form.delivery_type placeholder=form.delivery_type.label %}
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                                <input type="button" name="next" class="next action-button" value="Next"/>
+                            </fieldset>
+                            <fieldset>
+                                <h2 class="fs-title">Say ve qiymet</h2>
+                                {% render_field form.price placeholder=form.price.label %}
+                                {% render_field form.quantity placeholder=form.quantity.label %}
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                                <input type="submit" name="submit" class="submit action-button" value="Submit"/>
+                            </fieldset>
+
+                        </form>
+                    </div>
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    <div class="container">#}
+    {##}
+    {#        #}
+    {#        <form id='addform' method="POST" enctype="multipart/form-data">#}
+    {#            {% csrf_token %}#}
+    {#            <input type="hidden" name="image_data" value="{{ image_data }}">#}
+    {#            <div class="form-group">#}
+    {##}
+    {##}
+    {#                {% for field in form %}#}
+    {#                    {% render_field field class='form-control' placeholder=field.label %}#}
+    {#                {% endfor %}#}
+    {##}
+    {#            </div>#}
+    {#            <div class="dropzone dropzone-previews dz-clickable my_dropzone">#}
+    {#                <div class="dz-default dz-message">#}
+    {#                    <span><span class="dropzone-file-icon"></span>Drag and drop a file here or click</span></div>#}
+    {#            </div>#}
+    {#            <button type="submit" class="btn btn-primary">Submit</button>#}
+    {##}
+    {#        </form>#}
+    {##}
+    {##}
+    {#    </div>#}
+
+    <script src="/static/js/app.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+    <script src="/static/js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHBogTzzKWBngIxwUwHV_VbQX9rHuL0ZE&libraries=places&callback=initAutocomplete"
+            async defer></script>
+    <script>
+        var needsUpdate = true;
+        $(document).on('click','li',function () {
+            var checker = $(this).text()
+            var after =$(this).closest('.nice-select')
+            if (checker ==='Shef' && needsUpdate){
+                after.after('<input type="number" name="delivery_price" class="delivery_price form-control" placeholder="Catdirilma qiymeti">')
+                needsUpdate = false;
+            }
+            else if(checker ==='User'){
+                $('.delivery_price').remove()
+                needsUpdate = true;
+            }
+        })
+    </script>
+    <script>
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                }
+            }
+        });
+        Dropzone.autoDiscover = false;
+        Dropzone.options.my_dropzone = {
+            paramName: "orginal", // The name that will be used to transfer the file
+            maxFilesize: 50, // MB
+            maxFiles: 25,
+        };
+        console.log('adas');
+        $(".my_dropzone").dropzone({
+            url: "{% url 'picture-add' %}",
+            addRemoveLinks: true,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            sending: function (file, xhr, formData) {
+                formData.append('csrfmiddlewaretoken', "{{ csrf_token }}"); // add csrf token
+                formData.append('image_data', '{{ image_data }}'); // send each image data
+            },
+            success: function (file, response) {
+                file.previewElement.classList.add("dz-success");
+                if (response.uploaded) {
+                    file.img_pk = response.pk;
+                } else {
+                    file.img_pk = 1;
+                }
+            },
+            removedfile: function (file, serverFileName) {
+                var file_pk = file.img_pk;
+                console.log(file_pk);
+                $.ajax({
+                    url: "{% url 'picture-delete' %}",
+                    type: "POST",
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    data: {'remove_object': file_pk, 'image_data': '{{ image_data }}'}
+                });
+                //console.log($(this).closest('.dz-preview'));
+                var _ref;
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            },
+        })
+    </script>
+{% endblock %}

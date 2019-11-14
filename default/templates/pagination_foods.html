@@ -1,0 +1,75 @@
+{% load thumbnail %}
+<div class="food-menu-area text-center">
+    <div class="row">
+
+        <div class="row text-center masonary">
+            <div id="portfolio-grid" class="menu-lists text-center col-3">
+                {% for food in meals %}
+                    <div class="item-single pf-item pancakes meat">
+                        <div class="item">
+                            <div class="thumb hovereffect">
+                                {% if food.mealsimages_set.last.image.url|length > 0 %}
+                                    {% thumbnail food.mealsimages_set.last.image "360x270" crop="center" as img %}
+                                        <a href="{% url 'detail-food' food.id %}"><img
+                                                class="img-responsive"
+                                                src={{ img.url }}></a>
+                                    {% endthumbnail %}
+                                {% else %}
+                                    {% thumbnail food.image_default "360x270" crop="center" as img %}
+                                        <a href="{% url 'detail-food' food.id %}"><img
+                                                class="img-responsive"
+                                                src={{ img.url }}></a>
+                                    {% endthumbnail %}
+                                {% endif %}
+                                <a href="{% url 'detail-food' food.id %}">
+                                    <div class="overlay">
+                                        <h2>{{ food.name }}</h2>
+                                    </div>
+                                </a>
+
+
+                                <div class="price">
+                                    <h5>{{ food.price }} azn</h5>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <h4><a href="#">{{ food.name }}</a></h4>
+
+                                <span>{{ food.category }}</span>
+                                <hr>
+                                <span class="post_like_count">Bəyənmə sayı: {{ food.like_set.all.count }}</span>
+                                <hr>
+                                <span>Paylasilma tarixi: {{ food.date|date:"d M G : i" }}</span>
+                                {% if food.author != request.user %}
+                                    <div class="button">
+                                        <a href="{% url 'order' food.id %}">Order Now</a>
+                                    </div>
+                                {% else %}
+                                    <div class="button">
+                                        <a href="{% url 'index' %}">Order Now</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            {% if category == 'Morning' %}
+                <a href="{% url 'morning' %}" class="btn btn-danger">Daha cox</a>
+            {% endif %}
+            {% if category == 'All' %}
+                <a href="{% url 'all-food' %}" class="btn btn-danger">Daha cox</a>
+            {% endif %}
+            {% if category == 'Lunch' %}
+                <a href="{% url 'lunch' %}" class="btn btn-danger">Daha cox</a>
+            {% endif %}
+            {% if category == 'Supper' %}
+                <a href="{% url 'supper' %}" class="btn btn-danger">Daha cox</a>
+            {% endif %}
+
+
+        </div>
+
+    </div>
+</div>

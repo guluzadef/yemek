@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+{% load static %}
+{% load thumbnail %}
+{% load widget_tweaks %}
+<html lang="en">
+
+
+<!-- Mirrored from validthemes.com/themeforest/recafe/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 23 Sep 2019 16:07:34 GMT -->
+<head>
+
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Rescaf - Food & Restauratn Template">
+
+    <!-- ========== Page Title ========== -->
+    <title>Rescaf - Food & Restauratn Template</title>
+
+
+    <!-- Skin CSS file (styling of UI - buttons, caption, etc.)
+         In the folder of skin CSS file there are also:
+         - .png and .svg icons sprite,
+         - preloader.gif (for browsers that do not support CSS animations) -->
+
+    <!-- ========== Favicon Icon ========== -->
+    {# slick css#}
+    <link rel="stylesheet" type="text/css" href="/static/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/slick/slick-theme.css"/>
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/map.css">
+    <!-- ========== Start Stylesheet ========== -->
+    <link href="/static/css/app.min.css" rel="stylesheet">
+    <link href="/static/css/custom.css" rel="stylesheet">
+    <link href="{% static 'css/additional.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/snackbar.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/flaticon-set.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/owl.theme.default.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/bootsnav.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet"/>
+    {#    <link href="{% static 'css/profile.css' %}" rel="stylesheet"/>#}
+    {#    <link href="{% static 'css/profil.css' %}" rel="stylesheet"/>#}
+
+
+    <!-- ========== End Stylesheet ========== -->
+
+
+    <!-- ========== Google Fonts ========== -->
+    <link href="../../../fonts.googleapis.com/cssd2d5.css?family=Open+Sans" rel="stylesheet">
+    <link href="../../../fonts.googleapis.com/cssee16.css?family=Poppins:300,500,600,700,800" rel="stylesheet">
+    <link href="../../../fonts.googleapis.com/css7e91.css?family=Dancing+Script:400,700" rel="stylesheet">
+    <script src="/static/js/app.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+</head>
+
+<!-- Preloader Start -->
+
+<div class="se-pre-con"></div>
+
+<header id="home">
+
+    <div id="snackbar"></div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tag }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Navigation -->
+    <nav class="navbar navbar-default navbar-fixed navbar-transparent dark bootsnav shadow-less">
+
+        <div class="container">
+
+            <div class="attr-nav">
+
+                <ul>
+                    <li class="append_notify">
+                        {% if notify_check %}
+                            <i class="fas circle_notify fa-circle"></i>
+                        {% endif %}
+                    </li>
+                    <li class="side-menu"><a href="#"><i class="fa fa-bars"style="color: black"></i></a></li>
+                </ul>
+
+            </div>
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    {% for i in sitename %}
+                        <img src="{{ i.icon.url }}" style="width: 100px;height: 100px" alt="">
+                        {#                        <a href="{% url 'index' %}"><h2>{{ i.name }}</h2></a>#}
+                    {% endfor %}
+                    <p class="logo_yemake logo logo-display" style="color:black;;">YEMAKE</p>
+                    <p class="logo_yemake logo logo-scrolled" style="color: black">YEMAKE</p>
+                    {#                    <img src="{% static 'img/logo.png' %}" class="logo logo-scrolled" alt="Logo">#}
+                </a>
+            </div>
+            <!-- End Header Navigation -->
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <form class="search-form-1" role="search">
+                    <div class="form-group pull-right" id="search">
+                        <input type="text" name="q" value="{{ request.GET.q }}" id="under_search"
+                               class="form-control under_search_hidden" placeholder="Search">
+                        {#                        <button type="submit" class="form-control form-control-submit">Submit</button>#}
+                        <span class="search-label logo-display" style="color: black"><i class=" fa fa-search"></i></span>
+                        <span style="color: black" class="logo-scrolled search-label"><i
+                                class="fa fa-search"></i></span>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right" data-in="#" data-out="#">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"></a>
+                    {% for i in menu %}
+                        <li><a href="{{ i.url }}" class="{{ i.icon }}" style="color: black">{{ i.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div>
+
+        <!-- Start Side Menu -->
+        <div class="side">
+            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+            {% if request.user.is_authenticated %}
+                <div class="chef-area">
+                    <div class="chef-items">
+                        <div class="single-item">
+                            <div class="item">
+                                <div class="thumb">
+                                    {% thumbnail request.user.profile_photo "360x270" crop="center" as img %}
+                                        <img
+                                                src={{ img.url }}>
+                                    {% endthumbnail %}
+                                    {#                                    <img src="{{ request.user.profile_photo.url }}" alt="Thumb">#}
+                                </div>
+                                <div class="info">
+                                    <div class="overlay">
+                                        <h4>
+                                            <a href="{% url 'profile' request.user.id %}">{{ request.user.username }}</a>
+                                        </h4>
+                                        <small>{{ request.user.get_full_name }}</small>
+                                        <span>{{ request.user.user_type }}</span>
+                                    </div>
+                                    <div class="content text-left">
+                                        <p class="append_notify"><i class="icon_side fa fa-utensils"></i><a
+                                                class='my_orders' href="{% url 'orders' request.user.id %}">Menim
+                                            sifarislerim</a>
+                                            {% if notify_check %}
+                                                <i class="fas circle_notify fa-circle"></i>
+                                            {% endif %}
+                                        </p>
+
+                                        <p><i class="icon_side fas fa-user"></i><a
+                                                href="{% url 'profile' request.user.id %}">Profil</a></p>
+                                        <p><i class="icon_side fa fa-edit"></i><a
+                                                href="{% url 'settings' %}">Ayarlar</a></p>
+                                        <p><i class="icon_side fa fa-toggle-off"></i><a
+                                                href="{% url 'logout' %}">Cixis</a></p>
+                                        <ul>
+                                            <li class="facebook">
+                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                            </li>
+                                            <li class="instagram">
+                                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% else %}
+
+                <div class="widget">
+
+                    <div class="changes">
+                        <div class="btn login">Login</div>
+                        <div class="btn register">Register</div>
+                    </div>
+
+                </div>
+                <div class="widget choice"></div>
+
+                <div class="widget select">
+                <div class="widget social">
+                    <h4 class="title">Connect With Us</h4>
+                    <ul class="link">
+                        <li class="facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li class="pinterest"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                        <li class="dribbble"><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                    </ul>
+                </div>
+            {% endif %}
+            </div>
+
+        </div>
+        <!-- End Side Menu -->
+
+    </nav>
+    <!-- End Navigation -->
+
+</header>
+<body>
+
+    <div class="test" style="margin: 100px"></div>
+
+
+    <main>
+
+        <!-- Page links -->
+         <div class="page-links">
+        <div class="container">
+            <div class="pull-left">
+                <ul class="link-list">
+                    <li><a class="active" href="{% url 'settings' %}">Profile</a></li>
+                    <li><a  href="{% url 'social' %}">Social medias</a></li>
+                    <li><a href="{% url 'password' %}">Security</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        <!-- END Page links -->
+
+        <section class="no-border-bottom section-sm">
+            <div class="container">
+                <header class="section-header">
+                    <span>Settings</span>
+                    <h3>Profile settings</h3>
+                    <p>Change your name, avatar, location, description, etc.</p>
+                </header>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Profile</h6>
+                            </div>
+
+                            <div class="card-block">
+                                <div class="form-content">
+                                    <form method="post" enctype="multipart/form-data">
+
+                                        {% csrf_token %}
+
+                                        <input type="hidden" name="settings" value="1">
+                                        {% for field in form %}
+                                            <div class="settings_form">
+                                                <label for=" {{ field.id_for_label }}">{{ field.label }}:</label>
+                                                {{ field|add_class:"form-control" }}
+
+
+                                            </div>
+
+                                        {% endfor %}
+                                        <br>
+                                        <button type="submit" class="btn btn-success">Yadda saxla</button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Avatar</h6>
+                            </div>
+
+                            <div class="card-block">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="profile_settings" value="sdsadasd">
+                                    {% for field in profilephoto %}
+                                        <div class="settings_form">
+                                            <label for=" {{ field.id_for_label }}"
+                                                   style="display: none"></label>
+                                            {{ field|add_class:"form-control dropify" }}
+
+
+                                        </div>
+
+                                    {% endfor %}
+                                    {#                                    <input type="file" class="dropify" data-default-file="assets/img/avatar-2.jpg"#}
+                                    {#                                           data-max-height="150" data-max-width="150">#}
+                                    <br>
+                                    <button class="btn btn-primary btn-sm" type="submit">Yenilə</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+    <!-- END Main container -->
+
+
+    <!-- Site footer -->
+</body>
+
+
+<footer class="bg-dark">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="f-items col- title-effect text-light default-padding">
+
+                    <div class="col-md-4 col-sm-4  equal-height item">
+                        <div class="f-item address">
+                            {% for e in sitename %}
+                                <img src="{{ e.icon.url }}" alt="Logo">
+                            {% endfor %}
+                            <p class="logo_yemake logo logo-scrolled" style="color: white;margin-top: -60px;margin-left: 38px;">YEMAKE</p>
+
+                            {% for i in footer %}
+
+                                <p>
+                                    {{ i.description }}
+                                </p>
+                                <ul>
+                                    <li>
+                                        <span>Phone: </span> {{ i.number }}
+                                    </li>
+                                    <li>
+                                        <span>Email: </span> <a href="mailto:support@validtheme.com">{{ i.email }}</a>
+                                    </li>
+                                </ul>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4  equal-height item">
+                        <div class="f-item link">
+                            <h4>Menu</h4>
+                            <ul>
+                                {% for i in menu %}
+                                    <li>
+                                        <a href="{{ i.url }}">{{ i.name }}</a>
+                                    </li>
+                                {% endfor %}
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4 col-sm-4  equal-height item" style="float: right">
+
+                        <div class="f-item inst-feed">
+                            <h4>Instagram</h4>
+                            <ul>
+                                {% for insta in instagram %}
+
+                                    <li>
+
+                                        <a href="{{ insta.url }}">
+                                            {% if insta.instagram_img %}
+                                                {% thumbnail insta.instagram_img "150x120" crop="center" as img %}
+                                                    <a href="{{ insta.url }}" target="_blank"><img
+                                                            src={{ img.url }}></a>
+                                                {% endthumbnail %}
+
+                                            {% endif %}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- Start Footer Bottom -->
+    <div class="footer-bottom bg-dark text-light">
+        <div class="container">
+            <div class="row">
+                {% for foo in footer %}
+
+                    <div class="col-md-6">
+                        <p>&copy; {{ foo.copyright }} <a href="#">validthemes</a></p>
+                    </div>
+                    <div class="col-md-6 text-right link">
+                        <ul>
+                            <li>
+                                <a href="#">Terms of user</a>
+                            </li>
+                            <li>
+                                <a href="#">License</a>
+                            </li>
+                            <li>
+                                <a href="#">Support</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+
+</footer>
+<audio id="notification-sound" src="{% static 'audio/follow_sound.mp3' %}"></audio>
+{#slick js#}
+<script type="text/javascript" src="/static/slick/slick.js"></script>
+{#<script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>#}
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/equal-height.min.js' %}"></script>
+<script src="{% static 'js/jquery.appear.js' %}/"></script>
+<script src="{% static 'js/jquery.easing.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/modernizr.custom.13711.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/wow.min.js' %}/"></script>
+<script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'js/count-to.js' %}"></script>
+<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'js/YTPlayer.min.js' %}"></script>
+<script src="{% static 'js/bootsnav.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/multi-form.js' %}"></script>
+
+<script>
+    $(document).ready(function () {
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                }
+            }
+        });
+        $('.register').click(function () {
+            $('#loginForm').remove()
+            $('.login').removeClass('active-button')
+            $(this).addClass('active-button');
+            if ($('.choice').children().length > 0) {
+                console.log('yES')
+            } else {
+                $('.choice').append('<div class="btn like-cooker">Aspaz kimi</div><div class="btn like-user">Istifadeci kimi</div>').hide().fadeIn(500);
+            }
+            $('.like-cooker').click(function () {
+                $.ajax({
+                    url:{% url 'cooker_register' %},
+                    data: {},
+                    success: function (data) {
+                        $('.select').html(data).hide().fadeIn(1000);
+                    }
+                });
+            });
+            $('.like-user').click(function () {
+                $.ajax({
+                    url:{% url 'user_register' %},
+                    data: {},
+                    success: function (data) {
+                        $('.select').html(data).hide().fadeIn(1000);
+                    }
+                });
+            })
+        })
+        $('.login').click(function () {
+            $('.like-user').remove();
+            $('.like-cooker').remove();
+            $('.register').removeClass('active-button')
+            $(this).addClass('active-button');
+            $.ajax({
+                url:{% url 'login' %},
+                data: {},
+                success: function (data) {
+                    $('.select').html(data).hide().fadeIn(1000);
+                }
+            });
+            console.log('login')
+        })
+    })
+</script>
+{% if messages %}
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('#exampleModal').modal({show: true});
+        });
+    </script>
+{% endif %}
+<script type="application/javascript">
+    var comment;
+    if (location.protocol === 'https:') {
+        comment = new WebSocket('wss://' + window.location.host + '/comment/');
+    } else {
+        comment = new WebSocket('ws://' + window.location.host + '/comment/');
+    }
+
+
+    comment.onopen = function open() {
+        console.log('Connect to Socket');
+        $('.ready').click(function () {
+            to_user = $(this).attr('data-id');
+            ordering_id = $(this).attr('ordering-id');
+            activity_type = $(this).attr('id')
+            comment.send(JSON.stringify({
+                "from_user": '{{ request.user.id }}',
+                "to_user": to_user,
+                'activity_type': activity_type,
+                'ordering_id': ordering_id
+            }))
+        })
+        $('.delete').click(function () {
+            console.log('clicked')
+            to_user = $(this).attr('data-id');
+            ordering_id = $(this).attr('ordering-id');
+            activity_type = $(this).attr('id')
+            comment.send(JSON.stringify({
+                "from_user": '{{ request.user.id }}',
+                "to_user": to_user,
+                'activity_type': activity_type,
+                'ordering_id': ordering_id
+            }))
+        })
+        $('#msform').submit(function () {
+            to_user = $('.to_cooker').attr('data-id');
+            activity_type = $('.to_cooker').attr('id')
+            console.log(to_user)
+            if (to_user) {
+                comment.send(JSON.stringify({
+                    "from_user": '{{ request.user.id }}',
+                    "to_user": to_user,
+                    'activity_type': activity_type,
+                }))
+            }
+        })
+    };
+
+    comment.onmessage = function message(event) {
+        data = JSON.parse(event.data)
+        if (data.message == '1') {
+            text = 'Sifarisiniz qebul olundu !'
+            notify_checker()
+            myFunction(text)
+            notify_sound()
+        } else if (data.message == '0') {
+            text = 'Teze sifarisiniz var !'
+            notify_checker()
+            myFunction(text)
+            notify_sound()
+        } else if (data.message == '2') {
+            text = 'Sifarisiniz qebul edilmedi!'
+            notify_checker()
+            myFunction(text)
+            notify_sound()
+        }
+
+    };
+
+
+    $(".btn-danger").click(function (e) {
+        comment.send(JSON.stringify({
+            "delete": "all"
+        }))
+    });
+    {#Functions #}
+
+    function notify_checker() {
+        var append_notify = $('.append_notify')
+        if (append_notify.attr('class').includes('true')) {
+            append_notify.removeClass('true')
+        } else {
+            append_notify.addClass('true')
+            append_notify.append('<i class="fas circle_notify fa-circle"></i>')
+        }
+    }
+
+    function myFunction(text) {
+        // Get the snackbar DIV
+        var x = document.getElementById("snackbar");
+
+        // Add the "show" class to DIV
+        x.className = "show";
+        x.innerText = text
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function () {
+            x.className = x.className.replace("show", "");
+        }, 3000);
+    }
+
+    function notify_sound() {
+        var notify = $('#notification-sound')[0]
+        notify.play()
+    }
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#search').on("click", (function (e) {
+            $('#under_search').removeClass('under_search_hidden')
+            $(".form-group").addClass("sb-search-open");
+            e.stopPropagation()
+        }));
+        $(document).on("click", function (e) {
+            if ($(e.target).is("#search") === false && $(".form-control").val().length == 0) {
+                $(".form-group").removeClass("sb-search-open");
+                $('#under_search').addClass('under_search_hidden')
+            }
+        });
+        $(".form-control-submit").click(function (e) {
+            $(".form-control").each(function () {
+                if ($(".form-control").val().length == 0) {
+                    e.preventDefault();
+                    $(this).css('border', '2px solid red');
+                }
+            })
+        })
+    })
+</script>
+<script>
+    $(document).ready(function (e) {
+        $(".time_day").click(function (e) {
+            var current_category = $(this).attr('data-category');
+            $.ajax({
+                url: "{% url 'category' %}",
+                method: "POST",
+                data: {
+                    'category': current_category
+                },
+                success: function (data) {
+                    console.log(data)
+                    $('.elvinbudeyismelidi').html(data).hide().fadeIn('slow');
+                },
+                error: function (xhr, msg, text) {
+                    console.log(xhr, msg, text);
+                }
+            })
+        })
+    })
+</script>
+<script>
+    $('.item_for_slick').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1
+    })
+</script>
+
+</html>
+

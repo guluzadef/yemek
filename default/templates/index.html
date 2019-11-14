@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block body %}
+    {% for obj in main %}
+        <div class="banner-area ds-fonts text-light video-bg-live bg-fixed"
+             style="background-image:url('{{ obj.icon_food.url }}')">
+            <div class="player"
+                 data-property="{videoURL:'{{ obj.video_url }}',containment:'.video-bg-live', showControls:false, autoPlay:true, zoom:0, loop:true, mute:true, startAt:5, opacity:1, quality:'default'}"></div>
+            <div id="bootcarousel" class="carousel transparent-nav slide carousel-fade animate_text"
+                 data-ride="carousel">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner shadow dark">
+                    <div class="item active">
+                        <div class="box-table">
+                            <div class="box-cell">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="content">
+                                                <h2 data-animation="animated fadeInUp"
+                                                    style="font-style: italic;font-family: serif;color: #949494;">{{ obj.title }}</h2>
+                                                {#                                                <h1 data-animation="animated slideInLeft">{{ obj.description }}</h1>#}
+                                                {% if request.user.user_type == 'Cooker' %}
+
+                                                    <div>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="{% url 'add-food' %}"
+                                                                   class="addpost btn btn-success" style="float: left;">Yemək
+                                                                    əlavə et</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Wrapper for slides -->
+
+                <!-- Left and right controls -->
+
+            </div>
+            <!-- Shape -->
+            <div class="wavesshape">
+                <img src="{% static 'img/shape.png' %}" alt="Shape">
+            </div>
+            <!-- Shape -->
+        </div>
+    {% endfor %}
+    <!-- End Banner -->
+    <br>
+    <br>
+    <div class="food-menu-area inc-isotop default-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="site-heading text-center">
+
+                        <h2> {{ first.name }} </h2>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="food-menu-area text-center">
+                <div class="row">
+                    <div class="col-md-12 food-menu-content">
+                        <div class="mix-item-menu text-center">
+                            <button class="time_day active" data-category="All">All</button>
+                            <button class="time_day" data-category="Morning">Seher</button>
+                            <button class="time_day" data-category="Lunch">Gunorta</button>
+                            <button class="time_day" data-category="Supper">Axşam</button>
+
+                        </div>
+
+
+                        <div class="row text-center masonary elvinbudeyismelidi">
+                            <div id="portfolio-grid" class="menu-lists text-center col-3 "
+                                 id="time_meat">
+                                {% for food in meals %}
+                                    <div class="item-single pf-item pancakes meat">
+                                        <div class="item">
+                                            <div class="thumb hovereffect">
+                                                {% if food.mealsimages_set.last.image.url|length > 0 %}
+                                                    {% thumbnail food.mealsimages_set.last.image "360x270" crop="center" as img %}
+                                                        <a href="{% url 'detail-food' food.id %}"><img
+                                                                class="img-responsive"
+                                                                src={{ img.url }}></a>
+                                                    {% endthumbnail %}
+                                                    <a href="{% url 'detail-food' food.id %}">
+                                                        <div class="overlay">
+                                                            <h2>{{ food.name }}</h2>
+                                                        </div>
+                                                    </a>
+                                                {% else %}
+                                                    {% thumbnail food.image_default "360x270" crop="center" as img %}
+                                                        <a href="{% url 'detail-food' food.id %}"><img
+                                                                class="img-responsive"
+                                                                src={{ img.url }}></a>
+                                                    {% endthumbnail %}
+                                                    <a href="{% url 'detail-food' food.id %}">
+                                                        <div class="overlay">
+                                                            <h2>{{ food.name }}</h2>
+                                                        </div>
+                                                    </a>
+                                                {% endif %}
+
+
+                                                <div class="price">
+                                                    <h5>{{ food.price }} azn</h5>
+                                                </div>
+                                            </div>
+                                            <div class="info">
+                                                <h4><a href="#">{{ food.name }}</a></h4>
+
+                                                <span>{{ food.category }}</span>
+                                                <hr>
+                                                <span class="post_like_count">Bəyənmə sayı: {{ food.like_set.all.count }}</span>
+                                                <hr>
+                                                <span>Paylasilma tarixi: {{ food.date|date:"d M G : i" }}</span>
+                                                {% if food.author != request.user %}
+                                                    <div class="button">
+                                                        <a href="{% url 'order' food.id %}">Order Now</a>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="button">
+                                                        <a href="{% url 'index' %}">Order Now</a>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+
+                            </div>
+                            <div class="row">
+                                <a href="{% url 'all-food' %}" class="btn btn-success"
+                                   style="border: none;background: #ff1818;">Daha çox</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="gallery-area default-padding">
+        <div class="container">
+            <div class="food-menu-area">
+                <div class="row">
+                    <div class="col-md-12 text-center food-menu-content">
+                        <h1>En cox Beyenilenler</h1>
+                        <div class="gallery-items col-4">
+                            <div class="row">
+                                <div class="col-md-12 text-center food-menu-content">
+                                    <div class="row magnific-mix-gallery text-center masonary">
+                                        <div id="portfolio-grid" class="item_for_slick">
+                                            {% for i in like_meal %}
+                                                <div class="pf-item pancakes meat">
+                                                    <div class="item-effect">
+                                                        {% if i.mealsimages_set.last.image.url|length > 0 %}
+                                                            <img src="
+
+
+
+
+
+                                                                    {% thumbnail i.mealsimages_set.last.image "300x200" crop="center" as thumb %}{{ thumb.url }}{% endthumbnail %}"
+                                                                 alt="">
+                                                            <a href="{% url 'detail-food' i.id %}"><i
+                                                                    class="fa fa-plus"></i></a>
+                                                        {% else %}
+                                                            <img src="
+
+
+
+
+
+                                                                    {% thumbnail i.image_default "300x200" crop="center" as thumb %}{{ thumb.url }}{% endthumbnail %}"
+                                                                 alt="">
+                                                            <a href="{% url 'detail-food' i.id %}"><i
+                                                                    class="fa fa-plus"></i></a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <!-- End Single Item -->
+                                            {% endfor %}
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}<!-- Preloader Start -->

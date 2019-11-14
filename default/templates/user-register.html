@@ -1,0 +1,9 @@
+{% load widget_tweaks %}
+
+<form method='POST' id="userForm" action="{% url 'user_register' %}">
+    {% csrf_token %}
+    {% for i in form %}
+        {% render_field i class="form-control input-margin" placeholder=i.label%}
+    {% endfor %}
+    <button class="btn btn-user" type="submit">Sign in</button>
+</form>

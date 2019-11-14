@@ -1,0 +1,10 @@
+
+{% load widget_tweaks %}
+
+<form method='POST' id="loginForm" action="{% url 'login' %}">
+    {% csrf_token %}
+    {% for i in form %}
+        {% render_field i class="form-control input-margin" placeholder=i.label%}
+    {% endfor %}
+    <button class="btn btn-user" type="submit">Login</button>
+</form>

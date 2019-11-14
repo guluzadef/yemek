@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+{% load thumbnail %}
+{% block body %}
+
+    <div class="breadcrumb-area shadow text-center dark bg-fixed text-light"
+         style="background-image: url({{ photos.example_page.url }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Gallery Grid Colum</h1>
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li class="active">Grid</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+    <!-- Start Gallery
+    ============================================= -->
+    <div class="gallery-area default-padding">
+        <div class="container">
+            <div class="food-menu-area">
+                <div class="row">
+                    <div class="col-md-12 text-center food-menu-content">
+
+                        <div class="gallery-items col-4">
+                            <div class="row">
+                                <div class="col-md-12 text-center food-menu-content">
+                                    <div class="row magnific-mix-gallery text-center masonary">
+                                        <div id="portfolio-grid">
+                                            {% for i in meals %}
+                                                <div class="pf-item pancakes meat">
+                                                    <div class="item-effect">
+                                                    {% if i.mealsimages_set.last.image.url|length > 0 %}
+                                                        <img src="
+
+                                                                {% thumbnail i.mealsimages_set.last.image "300x200" crop="center" as thumb %}{{ thumb.url }}{% endthumbnail %}"
+                                                             alt="">
+                                                        <a href="{% url 'detail-food' i.id %}"><i class="fa fa-plus"></i></a>
+                                                    {% else %}
+                                                         <img src="
+
+                                                                {% thumbnail i.image_default "300x200" crop="center" as thumb %}{{ thumb.url }}{% endthumbnail %}"
+                                                             alt="">
+                                                        <a href="{% url 'detail-food' i.id %}"><i class="fa fa-plus"></i></a>
+                                                    {% endif %}
+
+
+                                                        {#                                                        <img width="200px" height="200px"#}
+                                                        {#                                                             src="{{ i.mealsimages_set.last.image.url }}" alt="Thumb">#}
+                                                        {#                                                        <a href="{% url 'detail-food' i.id %}"><i#}
+                                                        {#                                                                class="fa fa-plus"></i></a>#}
+                                                    </div>
+                                                </div>
+
+                                                <!-- End Single Item -->
+                                            {% endfor %}
+
+                                        </div>
+                                        <ul class="pager">
+                                            {% if meals.has_previous %}
+                                                <li class="page-item disabled"><a class="page-link"
+                                                                                  href="?page={{ meals.previous_page_number }}"><i
+                                                        class="fa fa-angle-left"></i></a>
+                                                </li>
+                                            {% endif %}
+
+
+                                            {% if meals.has_next %}
+                                                <li class="page-item"><a class="page-link"
+                                                                         href="?page={{ meals.next_page_number }}"><i
+                                                        class="fa fa-angle-right"></i></a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Gallery -->
+{% endblock %}

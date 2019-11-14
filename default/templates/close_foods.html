@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block body %}
+    <div class="breadcrumb-area shadow text-center dark bg-fixed text-light"
+         style="background-image: url({{ photos.example_page.url }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{ text.addfood_page }}</h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reservation about-area" style="margin-bottom: 100px">
+        <div class="container">
+            <div class="row">
+                <div class="reservation-items about-items">
+                    <div class="col-md-12 info">
+                        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                        <div id="map" class="map_close_foods"></div>
+                        <div class="lng-lat">
+
+                        </div>
+                        <button type="button" class="btn btn-theme btn_close_foods">
+                            Axtar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+    <div class="food-menu-area text-center">
+        <div class="row">
+            <div class="col-md-12 food-menu-content">
+                <div class="row text-center masonary">
+                    <div id="portfolio-grid" class="menu-lists text-center col-3">
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="/static/js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHBogTzzKWBngIxwUwHV_VbQX9rHuL0ZE&libraries=places&callback=initAutocomplete"
+            async defer></script>
+    <script>
+        $(document).ready(function () {
+            $('.btn_close_foods').click(function () {
+                var lng = $('input[name ="lng"]').val()
+                var lat = $('input[name ="lat"]').val()
+
+                $.ajax({
+                    method:"POST",
+                    url:"{% url 'close_foods_helper' %}",
+                    data:{
+                        lng:lng,
+                        lat:lat,
+                    },
+                    success:function (data) {
+                        $('#portfolio-grid').html(data)
+                    }
+                })
+            })
+        })
+        $(document).on('click','.page_number',function () {
+            var lng = $('input[name ="lng"]').val()
+            var lat = $('input[name ="lat"]').val()
+            var data_url = $(this).attr('data-url')
+            $.ajax({
+                method:"POST",
+                url:data_url,
+                data:{
+                    lng:lng,
+                    lat:lat,
+                },
+                success:function (data) {
+                    console.log(data)
+                    $(".food-menu-content").html(data)
+                }
+            })
+        })
+
+    </script>
+{% endblock %}

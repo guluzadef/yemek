@@ -13,7 +13,7 @@ channels-redis==2.4.1
 constantly==15.1.0
 cryptography==2.8
 daphne==2.3.0
-Django==2.2.7
+Django==2.2.24
 django-appconf==1.0.3
 django-celery-beat==1.5.0
 django-celery-results==1.1.2
